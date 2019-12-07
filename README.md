@@ -9,6 +9,7 @@ Download, clone, or fork this repository to use the R code within your local R i
 Furthermore, the runGitHub command from the Shiny package can be used to immediately execute the latest version from within R:
 
 `library(shiny)`
+
 `runGitHub("PMX_Simulations", "michielve")`
 
 
