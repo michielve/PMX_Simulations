@@ -1,5 +1,4 @@
-
-################# Set the dose units
+################# Set the dose units based on the concentration units
 dose_units <- function(C_units){
   ## Set dose units
   if(C_units == "ug/L"){

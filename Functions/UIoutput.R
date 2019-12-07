@@ -1,11 +1,11 @@
+##################################
+## Model output tab
 UIoutput <- function() {
-  
-
   
   tagList(
   fluidRow(
-    box(solidHeader = TRUE, status = "primary",collapsible = F,title="Pharmacokinetic profiles",
-        plotOutput("PKplot"), 
+    box(solidHeader = TRUE, status = "primary",collapsible = F,title="Pharmacokinetic profiles",width=8,
+        plotOutput("PKplot"),  # PK profiles
         
         fluidRow(
           column(6,  HTML('<b>Show prediction interval:</b>')),
@@ -17,10 +17,12 @@ UIoutput <- function() {
           column(6,  
                  selectInput('units', label=NULL, c("ug/L","mg/L","nM")))
         ),
-        downloadButton("downloadData", "Download the simulated dataset (.csv)")
+        downloadButton("downloadData", "Download the simulated dataset (.csv)") # Download the simulated data
     ),
     
-    box(solidHeader = TRUE, status = "primary",collapsible = T,title="Summary statistics",
+    
+    ## Summary stats
+    box(solidHeader = TRUE, status = "primary",collapsible = T,title="Summary statistics",width=4,
         tableOutput('sumstattable'))
   )
   

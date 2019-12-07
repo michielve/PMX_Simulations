@@ -1,11 +1,10 @@
+########################################
+## Set dosing and simulation info to be used in mrgsolve
 UIsiminfo <- function() {
-  
-  
-  
+
   fluidRow(
     box(title="Dosing and simulation information", solidHeader = TRUE, width=12, status = "primary",collapsible = F ,
-        
-        
+        # Set route
         fluidRow(
           column(6,  HTML('<b>Route of administration</b>')),
           column(6,  
@@ -14,8 +13,7 @@ UIsiminfo <- function() {
         
           fluidRow(
             column(6,  HTML('<b>Dose (units) </b><br><em> (Add multiple cohorts: 100, 200, 300)</em>')),
-            column(6,textInput(  "dos", value=100, label=NULL))
-
+            column(6,textInput("dos", value=100, label=NULL))
         ),
         
         
@@ -53,29 +51,7 @@ UIsiminfo <- function() {
                  numericInput("nsamples", label=NULL, value = 100,min=0))
         )
         
-
-        
-        
     )
   )
   
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

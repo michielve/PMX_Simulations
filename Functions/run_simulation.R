@@ -1,11 +1,11 @@
+################################################
+## Main function to simulate the model
 run_simulation <- function(inp){
   
-  
-  ### Load in model code for mrgsolve once at start of app
+  ### Load in model code for mrgsolve - located in main folder
   mod <- mread_cache("popPK")
   
-  
-  ## Specify the omegas and sigmas
+  ## Specify the omegas and sigmas as a matrix based on user input
   omega <- cmat(inp$etaka,
                 0, inp$etacl,
                 0,0,inp$etavd,
@@ -19,11 +19,12 @@ run_simulation <- function(inp){
   
   
   ###################################################
-  ### Execute function for each dosing level
+  ### Repeat the simulation function for each dosing level
+  
+  # Split the user input on each comma and create a vector
   dosing_vector <- as.numeric(unlist(strsplit(inp$dos,",")))
   
-  
-  
+  # For each dose
   for (dose in dosing_vector) {
     
     ## Simulate subjects with the values
@@ -33,24 +34,22 @@ run_simulation <- function(inp){
     
     data <- merge(idata,Administration,by="ID")
     
-    
-    ## IV infusion  - This calculates the rate automatically
+    ## IV infusion  - This calculates the administration rate
     if(inp$admin =='I.V. Infusion'){
       data$rate <- data$amt/inp$dur
     }
     
-    
+    ####################### 
+    # Add the parameters to the dataset
     data$TVKA <- inp$ka
     data$TVCL <- inp$cl
     data$TVVC <- inp$vd
     data$TVVP1 <- inp$vd2
     data$TVVP2 <- inp$vd3
-    
     data$TVQ1 <- inp$q1
     data$TVQ2 <- inp$q2
     
-    
-    ### SET inter compartmental rates to 0 to remove the compartments
+    ### Set inter compartmental rates to 0 to remove the compartments from the simulation
     if(inp$cmt_structural =='1 CMT'){
       data$TVQ1 <- 0
       data$TVQ2 <- 0
@@ -59,16 +58,19 @@ run_simulation <- function(inp){
       data$TVQ2 <- 0
     }
     
-    # Perform simulation
+    #########################
+    # Perform simulation with mrgsolve
     df <- mod %>%
       data_set(data) %>%
-      idata_set(idata) %>%
+     # idata_set(idata) %>%
       omat(omega) %>%
       smat(sigma) %>%
-      mrgsim(end=inp$sim_time,delta=inp$sim_time/120, obsonly=TRUE) %>% # Simulate 120 observations
+      mrgsim(end=inp$sim_time,delta=inp$sim_time/120, obsonly=TRUE) %>% # Simulate 120 observations over the time frame specified
       mutate(DOSE = dose) %>% # Add the current dose to the df
       as.data.frame()
       
+    #########################
+    # Create a new object on the first iteration, add new results afterwards
     if(dose == dosing_vector[1]){
       df_all <- df
     }else{
@@ -76,7 +78,5 @@ run_simulation <- function(inp){
     }
   }
   
-  
-  return(df_all)
-  
+  return(df_all) # Return the simulation results
 }

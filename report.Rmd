@@ -38,22 +38,21 @@ df_summary <- params$sumstat
 
 
 ```{r, results='asis',echo=F}
-if(nchar(params$description) > 1){
-cat('##Description\n')
+if(nchar(params$description) > 1){ # If there was a description specified, add it to the report
+cat('\n##Description\n')
 cat(params$description)
 }
 ```
 
-
 ```{r, fig.width=12, fig.height=4,echo=FALSE,results='hide',fig.keep='all',message = FALSE,warning=F}
-
+## Add the figures to the report
 suppressWarnings(params$graphs)
 
 ```
 
 
 ```{r table,echo=F}
-
+## Add the summary statistics to the report
 kable(df_summary,caption=paste("PK Summary statistics ",params$compound))
 
 ```

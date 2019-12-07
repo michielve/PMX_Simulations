@@ -1,11 +1,11 @@
+#####################################
+## Set all model parameters
 UImodel <- function() {
-  
-  
-  
+
   fluidRow(
    
     box(solidHeader = TRUE, status = "primary",collapsible = F,title="Insert model parameters",width=12,
-        
+        ## Select the model structure from dropdown list
         fluidRow(
           column(5,  HTML('Model structure')),
           column(6,  
@@ -23,7 +23,7 @@ UImodel <- function() {
         
         
         ########################
-        ## absorption rate
+        ## Absorption rate
         conditionalPanel(
           condition = "input.admin == 'Depot'",
           
@@ -75,7 +75,7 @@ UImodel <- function() {
         ),
         
         ########################
-        ## Q 1
+        ## Intercompartmental clearance 1
         conditionalPanel(
           condition = "input.cmt_structural != '1 CMT'",
           
@@ -89,7 +89,7 @@ UImodel <- function() {
         ),
         
         ########################
-        ## Q 2
+        ## Intercompartmental clearance 2
         conditionalPanel(
           condition = "input.cmt_structural == '3 CMT'",
           
@@ -112,9 +112,8 @@ UImodel <- function() {
                  numericInput("etacl", label=NULL, value = 0.09,min=0,step = 0.01))
         ),
         
-        
-        ########## Residual
-        
+        #######################################################
+        ########## Residual variability
         fluidRow(
           column(5,  style='border-bottom:0px solid;', HTML('<b>Residual error</b>'))
           

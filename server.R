@@ -1,79 +1,71 @@
 #### Load required libraries
 library(shiny)
+library(shinydashboard)
 library(mrgsolve)
 library(dplyr)
 library(ggplot2)
 library(flux)
 library(rmarkdown)
 library(cowplot)
-#library(shinycssloaders)
 library(RColorBrewer)
 library(magrittr)
-library(shinydashboard)
+
+
 
 ## Shiny server code
 shinyServer(function(input, output) {
-
-
-
-#######################################################################
+  
+######################################################################################
 ################# Run mrgsolve simulation upon button click
+# DF_Simulation holds simulated data
 DF_Simulation <- eventReactive(input$do, {
   simulated_Data <- run_simulation(input)
   simulated_Data
 })
 
+
+######################################################################################
+################################### Output - Graph
 ### Calculate prediction intervals based on user input
+# prediction_intervals holds simulated prediction intervals
 prediction_intervals <- reactive({
   df <-   pi_function(DF_Simulation(),input)
   df
 })
 
+
+# lin_log_plots is a ggplot object of the simulated PK profiles
+lin_log_plots <- reactive({
+graph_function(prediction_intervals(),input)
+})
+
+
+## Show the plot 
+output$PKplot <- renderPlot({
+    lin_log_plots()
+  })
+  
+######################################################################################
+################################### Output - Table
 ############### Calculate summary statistics
+# sum_stats holds the summary statistics of the simulation per dose
 sum_stats <- reactive({
   df <-   numeric_stats_function(DF_Simulation(),input)
   df
 })
 
-
-
-
-
-
-
-  
-  
-
-####################################################
-################################### Output
-lin_log_plots <- reactive({
-  
-graph_function(prediction_intervals(),input)
-  
-})
-
-
-  ## PK plot 
-  output$PKplot <- renderPlot({
-    lin_log_plots()
-  })
-  
-  
-  
-  
-
-
-######################## Summary stats tables
-  
+## Show the summary stats table
 output$sumstattable <- renderTable(sum_stats(),align='c',bordered = TRUE)
-  
-  
+
+
+
+
   
 #####################################################################################  
-# Downloadable csv of selected dataset ----
+# Downloadable csv of generated PK dataset
 output$downloadData <- downloadHandler(
   filename = function() {
-    paste("Simulated_dataset",input$cmp_name,".csv",sep="")
+    paste("Simulated_dataset",input$cmp_name,".csv",sep="") # File name with compound name (if inserted in report tab)
   },
   content = function(file) {
     write.csv(DF_Simulation(), file, row.names = FALSE)
@@ -82,28 +74,14 @@ output$downloadData <- downloadHandler(
 
 
 
-
-
-
-
-
-
-
-
-
   
-  
-  #####################################################################################
-  ############# Generate .pdf report in rmarkdown
-  
-  
+#####################################################################################
+############# Generate .pdf report using rmarkdown
   output$report <- downloadHandler(
     filename = function() {
-      paste("PMX_popPK report -", Sys.Date(), ".pdf", sep="")
+      paste("PMX_popPK report -", Sys.Date(), ".pdf", sep="") # File name
     },
     content = function(file) {
-      
-      
       
       # Copy the report file to a temporary directory before processing it, in
       # case we don't have write permissions to the current working dir (which
@@ -111,7 +89,6 @@ output$downloadData <- downloadHandler(
       tempReport <- file.path(tempdir(), "report.Rmd")
       file.copy("report.Rmd", tempReport, overwrite = TRUE)
       
-
       tempLogo <- file.path(tempdir(), "Logo.png")
       file.copy("./www/Logo.png", tempLogo, overwrite = TRUE)
       
@@ -123,8 +100,6 @@ output$downloadData <- downloadHandler(
                              description=input$description,
                              dose_units=dose_units(input$units)
                              )
-      
-      
       # Knit the document, passing in the `params` list, and eval it in a
       # child of the global environment (this isolates the code in the document
       # from the code in this app).
@@ -133,9 +108,6 @@ output$downloadData <- downloadHandler(
                         envir = new.env(parent = globalenv())
       )
     }    
-      
-      
-      
   )
   
   
