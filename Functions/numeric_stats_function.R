@@ -56,7 +56,7 @@ numeric_stats_function <- function(df,inp){
     sumstat[(3*i-1),4] <- round(cmax_tmax[i,6],digits=2)
     sumstat[(3*i-1),5] <- round(cmax_tmax[i,7],digits=2)
     
-    sumstat[(3*i),1] <- paste("AUC 0-",inp$sim_time,sep="")
+    sumstat[(3*i),1] <- paste("AUC ",inp$sim_start,"-",(inp$sim_start+inp$sim_time),sep="")
     sumstat[(3*i),2] <- paste(unique(cmax_tmax$DOSE)[i], dose_units(inp$units))
     sumstat[(3*i),3] <- round(auc_summary[i,2],digits=2)
     sumstat[(3*i),4] <- round(auc_summary[i,3],digits=2)

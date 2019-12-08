@@ -21,7 +21,11 @@ shinyUI(
   dashboardSidebar(
     sidebarMenu(
       id = "tabs",
-      menuItem("Model selection", tabName = "model", icon = icon("folder")),
+      menuItem("Model selection", tabName = "main_model", icon = icon("folder"),startExpanded=T,
+               menuSubItem('Pre-defined PK models',
+                           tabName = 'model',selected=T)
+               ),
+      
       menuItem("Simulation details", tabName = "siminfo", icon = icon("file-invoice")),
       menuItem("Simulation output", tabName = "output", icon = icon("chart-area")),
       actionButton("do", "Start simulation",icon = icon("paper-plane"),style='background-color: #FF9933; ' ),

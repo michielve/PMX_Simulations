@@ -6,6 +6,7 @@ TVVP1 : 1 : Peripheral volume 1
 TVVP2 : 1 : Peripheral volume 2
 TVQ1 : 1 : Intercompartmental clearance 1
 TVQ2 : 1 : Intercompartmental clearance 2
+TVF : 1 : Gut Bioavailability
 
 $CMT GUT CENT P1 P2
 
@@ -20,6 +21,10 @@ double Q1 = TVQ1*exp(ETA(6));
 double Q2 = TVQ2*exp(ETA(7));
 
 
+double FGUT = TVF*exp(ETA(8));
+
+F_GUT =FGUT;
+
 // Define rate constants
 double k10 = CL/VC;
 
@@ -31,7 +36,7 @@ double k31 = Q2/VP2;
 
 
 // Define omega and sigma
-$OMEGA 0 0 0 0 0 0 0
+$OMEGA 0 0 0 0 0 0 0 0
 $SIGMA @labels PROP ADD
 0 0
 

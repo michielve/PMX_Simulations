@@ -96,6 +96,7 @@ output$downloadData <- downloadHandler(
       params_for_rmd =  list(sumstat=sum_stats(),
                              graphs=lin_log_plots(),
                              set_title=input$title,
+                             set_author=input$author,
                              compound=input$cmp_name,
                              description=input$description,
                              dose_units=dose_units(input$units)

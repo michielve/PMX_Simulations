@@ -30,8 +30,8 @@ UIoutput <- function() {
     box(solidHeader = TRUE, status = "success",collapsed=T,collapsible = T,title="Add user data",width=8,
 
     column(4,  HTML('<b>Include user data</b>
-                                <br>Column headers should minimally include the following columns: <em>ID,CONCENTRATIOON,TIME</em><br>
-                                a <em>DOSE</em> column can be added to stratify the data.<br>
+                                <br>Column headers should minimally include the following columns: <em>ID,CONCENTRATION,TIME</em><br>
+                                A <em>DOSE</em> column can be added to stratify the data.<br>
                                 ')),
     
     column(4,

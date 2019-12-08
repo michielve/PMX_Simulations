@@ -44,9 +44,15 @@ UIsiminfo <- function() {
           column(6, 
                  numericInput("sim_time", label=NULL, value = 12,min=0))
         ),
+        fluidRow(
+          column(6,  HTML('<b>Start simulation at x hours</b>')),
+          column(6, 
+                 numericInput("sim_start", label=NULL, value = 0,min=0))
+        ),
+        
         
         fluidRow(
-          column(6,  HTML('<b>Simulated number of individuals</b>')),
+          column(6,  HTML('<b>Simulated number of individuals per dosing level</b>')),
           column(6, 
                  numericInput("nsamples", label=NULL, value = 100,min=0))
         )

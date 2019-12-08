@@ -9,6 +9,10 @@ UIreport <- function() {
               column(4,  HTML('Report title')),
               column(8,textInput(  "title", placeholder='Report title',label=NULL))
             ),
+            fluidRow(
+              column(4,  HTML('Report author')),
+              column(8,textInput("author", placeholder='Author name',label=NULL))
+            ),
             # Set compound name
             fluidRow(
               column(4,  HTML('Compound name')),

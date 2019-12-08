@@ -16,10 +16,12 @@ params:
   sumstat: NA
   graphs: NA
   set_title: 
+  set_author: 
   compound:
   description:
   dose_units:
 title: "`r params$set_title`"
+author: "`r params$set_author`"
 
 ---
 

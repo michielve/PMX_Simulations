@@ -12,7 +12,8 @@ run_simulation <- function(inp){
                 0,0,0,inp$etavd2,
                 0,0,0,0,inp$etavd3,
                 0,0,0,0,0,inp$etaq1,
-                0,0,0,0,0,0,inp$etaq2)
+                0,0,0,0,0,0,inp$etaq2,
+                0,0,0,0,0,0,0,inp$etaF)
   
   sigma <- cmat(inp$sigmaprop,
                 0,inp$sigmaadd)
@@ -48,6 +49,7 @@ run_simulation <- function(inp){
     data$TVVP2 <- inp$vd3
     data$TVQ1 <- inp$q1
     data$TVQ2 <- inp$q2
+    data$TVF <- inp$bioF
     
     ### Set inter compartmental rates to 0 to remove the compartments from the simulation
     if(inp$cmt_structural =='1 CMT'){
@@ -58,6 +60,8 @@ run_simulation <- function(inp){
       data$TVQ2 <- 0
     }
     
+    
+    
     #########################
     # Perform simulation with mrgsolve
     df <- mod %>%
@@ -65,12 +69,14 @@ run_simulation <- function(inp){
      # idata_set(idata) %>%
       omat(omega) %>%
       smat(sigma) %>%
-      mrgsim(end=inp$sim_time,delta=inp$sim_time/120, obsonly=TRUE) %>% # Simulate 120 observations over the time frame specified
+      mrgsim(start=inp$sim_start,end=(inp$sim_start+inp$sim_time),delta=inp$sim_time/200, obsonly=TRUE) %>% # Simulate 200 observations over the time frame specified
       mutate(DOSE = dose) %>% # Add the current dose to the df
       as.data.frame()
+    
+    
       
     #########################
-    # Create a new object on the first iteration, add new results afterwards
+    # Create a new object on the first iteration, add new results for each dosing level afterwards
     if(dose == dosing_vector[1]){
       df_all <- df
     }else{
