@@ -11,6 +11,11 @@ http://www.pmxsolutions.com/software/pmx-simulation-and-report-generation/
 
 Due to the great functionality and ease-of-use, all simulations were based on mrgsolve. 
 
+<p align="center">
+<img src="./www/Shiny_Output.PNG">
+</p>
+
+
 
 
 ## Run application
