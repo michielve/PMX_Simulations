@@ -29,10 +29,7 @@ author: "`r params$set_author`"
 # The `params` object is available in the document.
 
 library(ggplot2)
-library(cowplot)
 library(knitr)
-library(RColorBrewer)
-
 df_summary <- params$sumstat
 
 
@@ -46,7 +43,7 @@ cat(params$description)
 }
 ```
 
-```{r, fig.width=12, fig.height=4,echo=FALSE,results='hide',fig.keep='all',message = FALSE,warning=F}
+```{r, fig.width=12, fig.height=6,echo=FALSE,results='hide',fig.keep='all',message = FALSE,warning=F}
 ## Add the figures to the report
 suppressWarnings(params$graphs)
 
