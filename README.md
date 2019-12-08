@@ -38,5 +38,5 @@ https://miktex.org/download
 
 
 ## Contribute
-Feel free to use and improve this repository to include additional functionality. Report bugs in the code in the issues section of this repository.
+Feel free to use and improve this repository to include additional functionality. Report bugs in the issues section of this repository.
 
