@@ -12,6 +12,22 @@ Furthermore, the runGitHub command from the Shiny package can be used to immedia
 `runGitHub("PMX_Simulations", "michielve")`
 
 
+## Add user table
+The user can upload a dataset to the shiny application to be included in the PK profile. The requirements of this dataset is that it should include a DOSE column to match the colors with the simulated profiles.
+
+An example can be found below:
+| ID | TIME | CONCENTRATION | DOSE |
+| :---: | :---: | :---: | :---: |
+| 1 | 0 | 0 | 100|
+| 1 | 1 | 8 | 100|
+| 1 | 2 | 13 | 100|
+| 1 | 4 | 4 | 100|
+| 2 | 0 | 0 | 100|
+| 2 | 1 | 7 | 100|
+| 2 | 2 | 10 | 100|
+| 2 | 4 | 6 | 100|
+
+
 ## Required software
 Make sure mrgsolve is installed and working on your computer:
 https://github.com/metrumresearchgroup/mrgsolve/wiki/mrgsolve-Installation
