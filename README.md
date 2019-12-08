@@ -1,8 +1,9 @@
+# PMX_Simulations repository by PMXSolutions.com
+
 <p align="center">
 <img src="./www/PMXSim.png" width="200" height="200">
 </p>
 
-# PMX_Simulations repository by PMXSolutions.com
 This Shiny application was created to assist in the simulation of pharmacokinetic profiles and the exploration of different dosing regimens.
 
 The latest version of this repository is being hosted on shinyapps.io and visible on:
