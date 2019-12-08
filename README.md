@@ -17,15 +17,15 @@ The user can upload a dataset to the shiny application to be included in the PK 
 
 An example can be found below:
 | ID | TIME | CONCENTRATION | DOSE |
-| :---: | :---: | :---: | :---: |
-| 1 | 0 | 0 | 100|
-| 1 | 1 | 8 | 100|
-| 1 | 2 | 13 | 100|
-| 1 | 4 | 4 | 100|
-| 2 | 0 | 0 | 100|
-| 2 | 1 | 7 | 100|
-| 2 | 2 | 10 | 100|
-| 2 | 4 | 6 | 100|
+| -- | ---- | ------------- | ---- |
+| 1  | 0    | 0             | 100  |
+| 1  | 1 | 8 | 100|
+| 1  | 2 | 13 | 100|
+| 1  | 4 | 4 | 100|
+| 2  | 0 | 0 | 100|
+| 2  | 1 | 7 | 100|
+| 2  | 2 | 10 | 100|
+| 2  | 4 | 6 | 100|
 
 
 ## Required software
