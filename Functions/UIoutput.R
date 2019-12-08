@@ -24,10 +24,38 @@ UIoutput <- function() {
     ## Summary stats
     box(solidHeader = TRUE, status = "primary",collapsible = T,title="Summary statistics",width=4,
         tableOutput('sumstattable'))
+  ),
+  
+  fluidRow(
+    box(solidHeader = TRUE, status = "success",collapsed=T,collapsible = T,title="Add user data",width=8,
+
+    column(4,  HTML('<b>Include user data</b>
+                                <br>Column headers should minimally include the following columns: <em>ID,CONCENTRATIOON,TIME</em><br>
+                                a <em>DOSE</em> column can be added to stratify the data.<br>
+                                ')),
+    
+    column(4,
+           # Input: Select a file ----
+           fileInput("file1", "Choose CSV File",
+                     multiple = TRUE,
+                     accept = c("text/csv",
+                                "text/comma-separated-values,text/plain",
+                                ".csv"))
+    ),
+    column(4,
+           # Input: Select separator from user dataset ----
+           radioButtons("sep", "Separator",
+                        choices = c(Comma = ",",
+                                    Semicolon = ";"),
+                        selected = ",")
+    )
   )
   
+
   
-)
+  
+  
+))
   
 }
 

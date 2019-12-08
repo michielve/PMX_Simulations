@@ -1,3 +1,7 @@
+#### Load required libraries for ui.R
+library(shiny)
+library(shinydashboard)
+
 ## Source all files with the R functions - This will load the functions in the environment
 file.sources = list.files("./Functions",full.names = T)
 sapply(file.sources,source,.GlobalEnv)

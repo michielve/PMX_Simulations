@@ -9,6 +9,29 @@ if (is.null(df)) return()
 df$DOSE <- paste(df$DOSE,dose_units(inp$units))
 
 
+
+
+
+##################################################
+####### Check if user data is provided
+userdata <- NULL
+if(!is.null(inp$file1)){
+  userdata <- read.csv(inp$file1$datapath,
+                       header = T,
+                       sep = inp$sep)
+  # Set header to capitols
+  colnames(userdata) <- toupper(colnames(userdata))
+  if("DOSE" %in% colnames(userdata))
+  {
+    userdata$DOSE <- paste(userdata$DOSE,dose_units(inp$units))  # Add units to dose column
+  }
+}
+
+
+
+
+
+
 # Create plot
 p1lin <- ggplot(df, aes(x=time,y=Median_C,color=DOSE)) +
   ## Add ribbon for variability
@@ -24,7 +47,24 @@ p1lin <- ggplot(df, aes(x=time,y=Median_C,color=DOSE)) +
   # Set theme details
   theme_bw()+
   theme(legend.position="none", panel.grid.minor = element_blank())+  # Remove minor grid lines because of log y-axis
-  scale_color_brewer(palette="Spectral")
+  scale_color_brewer(palette="Set1")
+
+
+
+####################### Include user data if available
+if(!is.null(userdata) & 'ID' %in% colnames(userdata) & 'TIME' %in% colnames(userdata) & 'CONCENTRATION' %in% colnames(userdata)){
+  if("DOSE" %in% colnames(userdata))
+  {
+    p1lin <- p1lin + 
+      geom_point(data=userdata,aes(x=TIME,y=CONCENTRATION),size=2) + # With dose as column
+      geom_line(data=userdata,aes(x=TIME,y=CONCENTRATION,group=ID),size=1) # With dose as column
+  }else{
+    p1lin <- p1lin + 
+      geom_point(data=userdata,aes(x=TIME,y=CONCENTRATION,color='User data'),size=2)+
+      geom_line(data=userdata,aes(x=TIME,y=CONCENTRATION,group=ID,color='User data'),size=1)
+  }
+}
+
 
 
 ## Same figure on log scale
