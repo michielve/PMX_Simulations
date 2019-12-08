@@ -16,6 +16,7 @@ Furthermore, the runGitHub command from the Shiny package can be used to immedia
 The user can upload a dataset to the shiny application to be included in the PK profile. The requirements of this dataset is that it should include a DOSE column to match the colors with the simulated profiles.
 
 An example can be found below:
+
 | ID | TIME | CONCENTRATION | DOSE |
 | -- | ---- | ------------- | ---- |
 | 1  | 0    | 0             | 100  |
