@@ -1,3 +1,6 @@
+<p align="center">
+<img src="./www/PMXSim.png" width="150" height="150">
+</p>
 # PMX_Simulations repository by PMXSolutions.com
 This Shiny application was created to assist in the simulation of pharmacokinetic profiles and the exploration of different dosing regimens.
 
@@ -6,7 +9,7 @@ http://www.pmxsolutions.com/software/pmx-simulation-and-report-generation/
 
 Due to the great functionality and ease-of-use, all simulations were based on mrgsolve. 
 
-![PMX Sim logo](./www/PMX Sim.png)
+
 
 ## Run application
 Download, clone, or fork this repository to use the R code within your local R installation. 
