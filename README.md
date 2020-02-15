@@ -7,7 +7,7 @@
 This Shiny application was created to assist in the simulation of pharmacokinetic profiles and the exploration of different dosing regimens.
 
 The latest version of this repository is being hosted on shinyapps.io and visible on:
-http://www.pmxsolutions.com/software/pmx-simulation-and-report-generation/
+https://www.pmxsolutions.com/software/pmx-simulation-and-report-generation/
 
 Due to the great functionality and ease-of-use, all simulations were based on mrgsolve. 
 
