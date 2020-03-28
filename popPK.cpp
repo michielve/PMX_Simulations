@@ -54,11 +54,6 @@ $TABLE
 double IPRED = CENT/VC;
 double DV = IPRED*(1+PROP)+ADD;
 
-// If negative simulation - repeat sigma
-while(DV < 0) {
-  simeps();
-  DV = IPRED*(1+PROP)+ADD;
-}
 
 
 $CAPTURE IPRED DV
