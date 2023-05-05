@@ -11,15 +11,16 @@ library(RColorBrewer)
 library(magrittr)
 
 
-
 ## Shiny server code
 shinyServer(function(input, output) {
+
+mod <- mread_cache("popPK")  
   
 ######################################################################################
 ################# Run mrgsolve simulation upon button click
 # DF_Simulation holds simulated data
 DF_Simulation <- eventReactive(input$do, {
-  simulated_Data <- run_simulation(input)
+  simulated_Data <- run_simulation(input,mod)
   simulated_Data
 })
 
@@ -108,6 +109,7 @@ output$downloadData <- downloadHandler(
                         params = params_for_rmd,
                         envir = new.env(parent = globalenv())
       )
+      
     }    
   )
   

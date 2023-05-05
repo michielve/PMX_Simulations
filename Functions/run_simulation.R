@@ -1,10 +1,8 @@
 ################################################
 ## Main function to simulate the model
-run_simulation <- function(inp){
+run_simulation <- function(inp,mod){
   
-  ### Load in model code for mrgsolve - located in main folder
-  mod <- mread_cache("popPK")
-  
+ 
   ## Specify the omegas and sigmas as a matrix based on user input
   omega <- cmat(inp$etaka,
                 0, inp$etacl,

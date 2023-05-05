@@ -54,7 +54,7 @@ UIsiminfo <- function() {
         fluidRow(
           column(6,  HTML('<b>Simulated number of individuals per dosing level</b>')),
           column(6, 
-                 numericInput("nsamples", label=NULL, value = 100,min=0))
+                 numericInput("nsamples", label=NULL, value = 50,min=0))
         )
         
     )
